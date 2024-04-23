@@ -1,3 +1,9 @@
+""""
+https://codespaces.new/FiredragonXD/project
+"""
+
+
+
 import random
 from item import HealthPotion
 
@@ -36,6 +42,18 @@ class Player:
         else:
             print("You haven't started the game yet.")
 
+    def pick_up_health(self):
+        extra_health = random.randint(10, 30)
+        print(f"You found {extra_health} extra health. Do you want to pick it up? (yes/no)")
+        choice = input().lower().strip()
+        if choice == "yes":
+            self.health = min(self.health + extra_health, self.max_health)
+            print(f"You picked up {extra_health} extra health.")
+        elif choice == "no":
+            print("You decided not to pick up the extra health.")
+        else:
+            print("Invalid choice.")
+
     def attack_enemy(self, enemy):
         damage = max(0, self.attack - enemy.defense)
         enemy.health -= damage
@@ -44,6 +62,7 @@ class Player:
         if enemy.health <= 0:
             print(f"{enemy.name} has been defeated!")
             self.current_location.enemy = None
+            self.pick_up_health()  # Player picks up extra health after defeating enemy
         else:
             self.receive_attack(enemy)
 
@@ -107,7 +126,7 @@ class RPGGame:
         self.locations = {"Town": town, "Forest": forest, "Cave": cave, "Dungeon": dungeon}
 
     def play(self):
-        print("Welcome to the tiny town adventure Game!")
+        print("Welcome to the RPG Game!")
         self.player.show_inventory()
         print("Available movement directions:", ", ".join(self.player.current_location.connections.keys()))
 
