@@ -126,7 +126,7 @@ class RPGGame:
         self.locations = {"Town": town, "Forest": forest, "Cave": cave, "Dungeon": dungeon}
 
     def play(self):
-        print("Welcome to the RPG Game!")
+        print("Welcome to the Tiny Town Adventure Game!")
         self.player.show_inventory()
         print("Available movement directions:", ", ".join(self.player.current_location.connections.keys()))
 
